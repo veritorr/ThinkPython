@@ -1,0 +1,54 @@
+__author__ = "Thomas D'Alleva"
+# NOTE:
+# Checks words of a designated size to see
+# if a letter in a given string of letters
+# exists in those size words
+# prints totals of given word sizes with
+# the forbidden letters and without
+# CHECKS:
+# Debug check: if more than one forbidden string of letters
+# is given the totals for each letter should add up to
+# the same value
+# DEPENDENCY:
+# needs the file "words.txt" in the project directory
+
+
+
+def check_no_letter(word, letter):
+    for char in word:
+        if char == letter:
+            return False
+    return True
+
+
+def avoids(word, letters):
+    for char in letters:
+        if char in word:
+            return False
+    return True
+
+def checkLetterInWords(letter, length):
+    fin = open('words.txt')
+    wordCount = 0
+    wordCountNo = 0
+    print "Checking letter %s" % c
+    for line in fin:
+        word = line.strip()
+        if len(word) != length:
+            continue
+        if (check_no_letter(word, c)):
+            print "There are no letters: %s in word %s " % (c, word)
+            wordCountNo += 1
+        else:
+            print "Letter %s is in word %s" % (c, word)
+            wordCount += 1
+    print "There are %r words with letters entered. " % wordCount
+    print "There are %r words with no letters entered. " % wordCountNo
+
+
+letters = raw_input("Enter forbidden letters")
+length = raw_input("Enter the size of the words you want to check.")
+
+for c in letters:
+    checkLetterInWords(c, int(length))
+    raw_input("Press Enter")
